@@ -75,7 +75,26 @@ public class Parcel
             t.WriteToParcel(this);
         }
         #endregion
-
+        #region enum
+        public void WriteEnum(Enum e)
+        {
+            byte b = (byte) Convert.ToInt32(e);
+            WriteByte(b);
+        }
+        public T ReadEnum<T>() where T: struct, IConvertible
+        {
+            if (!typeof(T).IsEnum)
+            {
+                throw new ArgumentException("T must be an enumerated type");
+            }
+            var b = ReadBytes(1)[0];
+            foreach (T item in Enum.GetValues(typeof(T)))
+            {
+                if ((byte)Convert.ToInt32(item)==b) return item;
+            }
+            throw new Exception("read fault");
+        }
+        #endregion
         #region Integer
         public int ReadInt()
         {
