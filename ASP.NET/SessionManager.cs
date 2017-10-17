@@ -33,7 +33,7 @@ namespace raminrahimzada
                 else
                     Remove("LoggedUserName");
             }
-            get { return Get<string>("LastErrorString"); }
+            get { return Get<string>("LoggedUserName"); }
         }         
         public static void RemoveAllSession()
         {
