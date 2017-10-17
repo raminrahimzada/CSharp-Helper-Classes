@@ -24,6 +24,7 @@ namespace raminrahimzada
         {
             HttpContext.Current.Session.Remove(key);
         }
+        //example property
         public static string LoggedUserName
         {
             set
