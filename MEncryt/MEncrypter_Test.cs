@@ -7,9 +7,9 @@ namespace MEncrypt_Commonly_implementation
     {
         static void Main()
         {
-            //to crack password we need 263130836933693530167218012160000000 mumkun hal
-            // sifreni 100 ile  qirmaq ucun saniyede 83438241036813016922633819 emeliyyat lazimdi
-            // eger agil isletmesen
+            //to crack password we need 263130836933693530167218012160000000 possible state
+            // you need 100 years  to crack password with  83438241036813016922633819 operation/second speed
+            // if you are not genious :D
 
             var enc =
                 new MEncrypter(
