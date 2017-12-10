@@ -17,6 +17,21 @@ namespace raminrahimzada
 {
     public static class Extensions
     {
+        public static string DataTableToJSON(this System.Data.DataTable dt)
+        {
+            var serializer = new JavaScriptSerializer();
+            var rows = new List<Dictionary<string, object>>();
+            foreach (DataRow dr in dt.Rows)
+            {
+                var row = new Dictionary<string, object>();
+                foreach (DataColumn col in dt.Columns)
+                {
+                    row.Add(col.ColumnName, dr[col]);
+                }
+                rows.Add(row);
+            }
+            return serializer.Serialize(rows);
+        }
          public static string Ci(this int eded)
         {
             var s = eded + "";
