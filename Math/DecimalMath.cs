@@ -213,7 +213,7 @@ namespace raminrahimzada
                 result *= xx * (1 - 1.0M / (2.0M * i));
                 y += result/(2*i+1);
                 i++;
-                Console.WriteLine(y);
+                //Console.WriteLine(y);
             } while (cachedResult != result);
             return y;
         }
