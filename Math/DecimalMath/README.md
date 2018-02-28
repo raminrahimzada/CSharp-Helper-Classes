@@ -28,6 +28,7 @@ Contains :<br/>
 PI
 PIx2
 PIdiv2
+PIdiv4
 E
 Einv
 LOG2
@@ -47,4 +48,6 @@ Sign
 Tanh
 Asin
 Acos
+Atan
+Atan2
 ```
