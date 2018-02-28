@@ -36,6 +36,10 @@ namespace raminrahimzada
         /// </summary>
         public static readonly decimal LOG2 = 0.693147180559945309417232121458176568075500134360255254120M;
         /// <summary>
+        /// log(10,E) factor
+        /// </summary>
+        public static readonly decimal Log10Inv = 0.434294481903251827651128918916605082294397005803666566114M;
+        /// <summary>
         /// Zero
         /// </summary>
         public static readonly decimal Zero = 0.0M;
@@ -117,6 +121,15 @@ namespace raminrahimzada
 
             return prod;
         }
+         /// <summary>
+        /// Analogy of Math.Log10
+        /// </summary>
+        /// <param name="x"></param>
+        /// <returns></returns>
+        public static decimal Log10(decimal x)
+        {
+            return Log(x) * Log10Inv;
+        }
         /// <summary>
         /// Analogy of Math.Log
         /// </summary>
@@ -129,7 +142,7 @@ namespace raminrahimzada
                 throw new ArgumentException("x must be greater than zero");
             }
             int count = 0;
-            while (x >= E)
+            while (x >= 1)
             {
                 x *= Einv;
                 count++;
