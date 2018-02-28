@@ -97,6 +97,9 @@ namespace raminrahimzada
         /// <returns></returns>
         public static decimal PowerN(decimal value, int power)
         {
+            if (power == 0) return One;
+            if (power < 0) return PowerN(1.0M / value, -power);
+            
             var q = power;
             var prod = One;
             var current = value;
