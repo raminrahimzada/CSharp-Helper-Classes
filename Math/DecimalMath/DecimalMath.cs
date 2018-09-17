@@ -10,48 +10,58 @@ namespace raminrahimzada
         /// <summary>
         /// represents PI
         /// </summary>
-        public static readonly decimal PI = 3.14159265358979323846264338327950288419716939937510M;
+        public const decimal Pi = 3.14159265358979323846264338327950288419716939937510M;
+
         /// <summary>
         /// represents 2*PI
         /// </summary>
-        public static readonly decimal PIx2 = 6.28318530717958647692528676655900576839433879875021M;
+        private const decimal PIx2 = 6.28318530717958647692528676655900576839433879875021M;
+
         /// <summary>
         /// represents E
         /// </summary>
-        public static readonly decimal E = 2.7182818284590452353602874713526624977572470936999595749M;
+        public const decimal E = 2.7182818284590452353602874713526624977572470936999595749M;
+
         /// <summary>
         /// represents PI/2
         /// </summary>
-        public static readonly decimal PIdiv2 = 1.570796326794896619231321691639751442098584699687552910487M;
+        private const decimal PIdiv2 = 1.570796326794896619231321691639751442098584699687552910487M;
+
         /// <summary>
         /// represents PI/4
         /// </summary>
-        public static readonly decimal PIdiv4 = 0.785398163397448309615660845819875721049292349843776455243M;
+        private const decimal PIdiv4 = 0.785398163397448309615660845819875721049292349843776455243M;
+
         /// <summary>
         /// represents 1.0/E
         /// </summary>
-        public static readonly decimal Einv = 0.3678794411714423215955237701614608674458111310317678M;
-        /// <summary>
-        /// represents Logarithm 2 from base E
-        /// </summary>
-        public static readonly decimal LOG2 = 0.693147180559945309417232121458176568075500134360255254120M;
+        private const decimal Einv = 0.3678794411714423215955237701614608674458111310317678M;
+
         /// <summary>
         /// log(10,E) factor
         /// </summary>
-        public static readonly decimal Log10Inv = 0.434294481903251827651128918916605082294397005803666566114M;
+        private const decimal Log10Inv = 0.434294481903251827651128918916605082294397005803666566114M;
+
         /// <summary>
         /// Zero
         /// </summary>
-        public static readonly decimal Zero = 0.0M;
+        public const decimal Zero = 0.0M;
+
         /// <summary>
         /// One
         /// </summary>
-        public static readonly decimal One = 1.0M;
+        public const decimal One = 1.0M;
+
+        /// <summary>
+        /// Represents 0.5M
+        /// </summary>
+        private const decimal Half = 0.5M;
 
         /// <summary>
         /// Max iterations count in Taylor series
         /// </summary>
-        public static int MaxIteration = 100;
+        private const int MaxIteration = 100;
+
         /// <summary>
         /// Analogy of Math.Exp method
         /// </summary>
@@ -59,7 +69,7 @@ namespace raminrahimzada
         /// <returns></returns>
         public static decimal Exp(decimal x)
         {
-            int count = 0;
+            var count = 0;
             while (x > One)
             {
                 x--;
@@ -70,9 +80,9 @@ namespace raminrahimzada
                 x++;
                 count--;
             }
-            int iteration = 1;
-            decimal result = One;
-            decimal fatorial = One;
+            var iteration = 1;
+            var result = One;
+            var fatorial = One;
             decimal cachedResult;
             do
             {
@@ -83,6 +93,7 @@ namespace raminrahimzada
             if (count != 0) result = result * PowerN(E, count);
             return result;
         }
+
         /// <summary>
         /// Analogy of Math.Pow method
         /// </summary>
@@ -93,6 +104,7 @@ namespace raminrahimzada
         {
             return Exp(pow * Log(value));
         }
+
         /// <summary>
         /// Power to the integer value
         /// </summary>
@@ -101,9 +113,9 @@ namespace raminrahimzada
         /// <returns></returns>
         public static decimal PowerN(decimal value, int power)
         {
-            if (power == 0) return One;
-            if (power < 0) return PowerN(1.0M / value, -power);
-            
+            if (power == Zero) return One;
+            if (power < Zero) return PowerN(One / value, -power);
+
             var q = power;
             var prod = One;
             var current = value;
@@ -115,13 +127,14 @@ namespace raminrahimzada
                     prod = current * prod; // picks up the relevant power
                     q--;
                 }
-                current = current * current; // value^i -> value^(2*i)
+                current *= current; // value^i -> value^(2*i)
                 q = q / 2;
             }
 
             return prod;
         }
-         /// <summary>
+
+        /// <summary>
         /// Analogy of Math.Log10
         /// </summary>
         /// <param name="x"></param>
@@ -130,6 +143,7 @@ namespace raminrahimzada
         {
             return Log(x) * Log10Inv;
         }
+
         /// <summary>
         /// Analogy of Math.Log
         /// </summary>
@@ -137,12 +151,12 @@ namespace raminrahimzada
         /// <returns></returns>
         public static decimal Log(decimal x)
         {
-            if (x <= 0)
+            if (x <= Zero)
             {
                 throw new ArgumentException("x must be greater than zero");
             }
-            int count = 0;
-            while (x >= 1)
+            var count = 0;
+            while (x >= One)
             {
                 x *= Einv;
                 count++;
@@ -154,10 +168,10 @@ namespace raminrahimzada
             }
             x--;
             if (x == 0) return count;
-            decimal result = 0.0M;
-            int iteration = 0;
-            decimal y = 1.0M;
-            decimal cacheResult = result - 1.0M;
+            var result = Zero;
+            var iteration = 0;
+            var y = One;
+            var cacheResult = result - One;
             while (cacheResult != result && iteration < MaxIteration)
             {
                 iteration++;
@@ -167,6 +181,7 @@ namespace raminrahimzada
             }
             return count - result;
         }
+
         /// <summary>
         /// Analogy of Math.Cos
         /// </summary>
@@ -183,29 +198,30 @@ namespace raminrahimzada
                 x += PIx2;
             }
             // now x in (-2pi,2pi)
-            if (x >= PI && x <= PIx2)
+            if (x >= Pi && x <= PIx2)
             {
-                return -Cos(x - PI);
+                return -Cos(x - Pi);
             }
-            if (x >= -PIx2 && x <= -PI)
+            if (x >= -PIx2 && x <= -Pi)
             {
-                return -Cos(x + PI);
+                return -Cos(x + Pi);
             }
             x = x * x;
             //y=1-x/2!+x^2/4!-x^3/6!...
-            decimal xx = -x * 0.5M;
-            decimal y = 1.0M + xx;
-            decimal cachedY = y - 1.0M;//init cache  with different value
-            for (int i = 1; cachedY != y && i < MaxIteration; i++)
+            var xx = -x * Half;
+            var y = One + xx;
+            var cachedY = y - One;//init cache  with different value
+            for (var i = 1; cachedY != y && i < MaxIteration; i++)
             {
                 cachedY = y;
                 decimal factor = i * (i + i + 3) + 1; //2i^2+2i+i+1=2i^2+3i+1
-                factor = -0.5M / factor;
+                factor = -Half / factor;
                 xx *= x * factor;
                 y += xx;
             }
             return y;
         }
+
         /// <summary>
         /// Analogy of Math.Tan
         /// </summary>
@@ -213,8 +229,11 @@ namespace raminrahimzada
         /// <returns></returns>
         public static decimal Tan(decimal x)
         {
-            return Sin(x) / Cos(x);
+            var cos = Cos(x);
+            if (cos == Zero) throw new ArgumentException(nameof(x));
+            return Sin(x) / cos;
         }
+
         /// <summary>
         /// Analogy of Math.Sin
         /// </summary>
@@ -223,25 +242,51 @@ namespace raminrahimzada
         public static decimal Sin(decimal x)
         {
             var cos = Cos(x);
-            var real = Math.Sin((double)x);
-            return Sqrt(1.0M - cos * cos) * Math.Sign(real);
+            var moduleOfSin = Sqrt(One - (cos * cos));
+            var sineIsPositive = IsSignOfSinePositive(x);
+            if (sineIsPositive) return moduleOfSin;
+            return -moduleOfSin;
         }
+
+        private static bool IsSignOfSinePositive(decimal x)
+        {
+            //truncating to  [-2*PI;2*PI]
+            while (x >= PIx2)
+            {
+                x -= PIx2;
+            }
+
+            while (x <= -PIx2)
+            {
+                x += PIx2;
+            }
+
+            //now x in [-2*PI;2*PI]
+            if (x >= -PIx2 && x <= -Pi) return true;
+            if (x >= -Pi && x <= Zero) return false;
+            if (x >= Zero && x <= Pi) return true;
+            if (x >= Pi && x <= PIx2) return false;
+            
+            //will not be reached
+            throw new ArgumentException(nameof(x));
+        }
+
         /// <summary>
         /// Analogy of Math.Sqrt
         /// </summary>
         /// <param name="x"></param>
         /// <param name="epsilon">lasts iteration while error less than this epsilon</param>
         /// <returns></returns>
-        public static decimal Sqrt(decimal x, decimal epsilon = 0.0M)
+        public static decimal Sqrt(decimal x, decimal epsilon = Zero)
         {
-            if (x < 0) throw new OverflowException("Cannot calculate square root from a negative number");
+            if (x < Zero) throw new OverflowException("Cannot calculate square root from a negative number");
             //initial approximation
             decimal current = (decimal)Math.Sqrt((double)x), previous;
             do
             {
                 previous = current;
-                if (previous == 0.0M) return 0.0M;
-                current = (previous + x / previous) * 0.5M;
+                if (previous == Zero) return Zero;
+                current = (previous + x / previous) * Half;
             } while (Abs(previous - current) > epsilon);
             return current;
         }
@@ -253,9 +298,10 @@ namespace raminrahimzada
         public static decimal Sinh(decimal x)
         {
             var y = Exp(x);
-            var yy = 1.0M / y;
-            return (y - yy) / 2.0M;
+            var yy = One / y;
+            return (y - yy) * Half;
         }
+
         /// <summary>
         /// Analogy of Math.Cosh
         /// </summary>
@@ -264,18 +310,20 @@ namespace raminrahimzada
         public static decimal Cosh(decimal x)
         {
             var y = Exp(x);
-            var yy = 1.0M / y;
-            return (y + yy) / 2.0M;
+            var yy = One / y;
+            return (y + yy) * Half;
         }
+
         /// <summary>
         /// Analogy of Math.Sign
         /// </summary>
         /// <param name="x"></param>
         /// <returns></returns>
-        public static decimal Sign(decimal x)
+        public static int Sign(decimal x)
         {
             return x < Zero ? -1 : (x > Zero ? 1 : 0);
         }
+
         /// <summary>
         /// Analogy of Math.Tanh
         /// </summary>
@@ -284,7 +332,7 @@ namespace raminrahimzada
         public static decimal Tanh(decimal x)
         {
             var y = Exp(x);
-            var yy = 1.0M / y;
+            var yy = One / y;
             return (y - yy) / (y + yy);
         }
 
@@ -295,7 +343,7 @@ namespace raminrahimzada
         /// <returns></returns>
         public static decimal Abs(decimal x)
         {
-            if (x<=Zero)
+            if (x <= Zero)
             {
                 return -x;
             }
@@ -314,7 +362,7 @@ namespace raminrahimzada
                 throw new ArgumentException("x must be in [-1,1]");
             }
             //known values
-            if (x == Zero) return 0;
+            if (x == Zero) return Zero;
             if (x == One) return PIdiv2;
             //asin function is odd function
             if (x < Zero) return -Asin(-x);
@@ -325,30 +373,31 @@ namespace raminrahimzada
             // asin(x)=0.5*(pi/2-asin(1-2*x*x)) 
             // if x>=0 is true
 
-            var newX = 1 - 2 * x * x;
+            var newX = One - 2 * x * x;
 
             //for calculating new value near to zero than current
             //because we gain more speed with values near to zero
-            if (Abs(x) >Abs(newX))
+            if (Abs(x) > Abs(newX))
             {
                 var t = Asin(newX);
-                return 0.5M * (PIdiv2 - t);
+                return Half * (PIdiv2 - t);
             }
-            decimal y = 0;
-            decimal result = x;
+            var y = Zero;
+            var result = x;
             decimal cachedResult;
-            int i = 1;
+            var i = 1;
             y += result;
             var xx = x * x;
             do
             {
                 cachedResult = result;
-                result *= xx * (1 - 1.0M / (2.0M * i));
+                result *= xx * (One - Half / (i));
                 y += result / (2 * i + 1);
                 i++;
             } while (cachedResult != result);
             return y;
         }
+
         /// <summary>
         /// Analogy of Math.Atan
         /// </summary>
@@ -358,7 +407,7 @@ namespace raminrahimzada
         {
             if (x == Zero) return Zero;
             if (x == One) return PIdiv4;
-            return Asin(x / Sqrt(1 + x * x));
+            return Asin(x / Sqrt(One + x * x));
         }
         /// <summary>
         /// Analogy of Math.Acos
@@ -369,7 +418,7 @@ namespace raminrahimzada
         {
             if (x == Zero) return PIdiv2;
             if (x == One) return Zero;
-            if (x < Zero) return PI - Acos(-x);
+            if (x < Zero) return Pi - Acos(-x);
             return PIdiv2 - Asin(x);
         }
 
@@ -381,23 +430,23 @@ namespace raminrahimzada
         /// <param name="y"></param>
         /// <param name="x"></param>
         /// <returns></returns>
-        public static decimal Atan2(decimal y,decimal x)
+        public static decimal Atan2(decimal y, decimal x)
         {
-            if (x>Zero)
+            if (x > Zero)
             {
                 return ATan(y / x);
             }
             if (x < Zero && y >= Zero)
             {
-                return ATan(y / x) + PI;
+                return ATan(y / x) + Pi;
             }
             if (x < Zero && y < Zero)
             {
-                return ATan(y / x) - PI;
+                return ATan(y / x) - Pi;
             }
             if (x == Zero && y > Zero)
             {
-                return  PIdiv2;
+                return PIdiv2;
             }
             if (x == Zero && y < Zero)
             {
