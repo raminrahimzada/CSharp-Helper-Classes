@@ -134,7 +134,7 @@
 
                 if (isPowerInteger && value > Zero)
                 {
-                    int powerInt = (int) value;
+                    int powerInt = (int)(pow);
                     return PowerN(value, powerInt);
                 }
 

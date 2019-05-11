@@ -99,5 +99,35 @@ namespace raminrahimzada
                 Debug.Assert(DecimalMath.Abs((decimal)d - z) < epsilon);
             }
         }
+        [TestMethod]
+        public void TestMethodPow001()
+        {
+            double x = 10;
+            double y = -5;
+            double result = Math.Pow(x, y);
+
+            Assert.AreEqual(result, 1E-05);
+
+            decimal dx = 10;
+            decimal dy = -5;
+            decimal dResult = DecimalMath.Power(dx, dy);
+
+            Assert.AreEqual(dResult, 0.00001m);
+        }
+        [TestMethod]
+        public void TestMethodPow002()
+        {
+            double x = 10;
+            double y = 5;
+            double result = Math.Pow(x, y);
+
+            Assert.AreEqual(result, 100000);
+
+            decimal dx = 10;
+            decimal dy = 5;
+            decimal dResult = DecimalMath.Power(dx, dy);
+
+            Assert.AreEqual(dResult, 100000m);
+        }
     }
 }
