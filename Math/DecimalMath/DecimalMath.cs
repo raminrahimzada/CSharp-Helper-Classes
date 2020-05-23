@@ -76,16 +76,19 @@
             public static decimal Exp(decimal x)
             {
                 var count = 0;
-                while (x > One)
+
+                if (x > One)
                 {
-                    x--;
-                    count++;
+                    count = Decimal.ToInt32(Decimal.Truncate(x));
+                    x = 0m + (x - Decimal.Truncate(x));
                 }
-                while (x < Zero)
+
+                if (x < Zero)
                 {
-                    x++;
-                    count--;
+                    count = Decimal.ToInt32(Decimal.Truncate(x) - 1);
+                    x = 1.0m + (x - Decimal.Truncate(x));
                 }
+
                 var iteration = 1;
                 var result = One;
                 var fatorial = One;
