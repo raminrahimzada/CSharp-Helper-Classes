@@ -116,9 +116,7 @@ namespace raminrahimzada
             if (pow == Zero) return One;
             if (pow == One) return value;
             if (value == One) return One;
-
-            if (value == Zero && pow == Zero) return One;
-
+            
             if (value == Zero)
             {
                 if (pow > Zero)
