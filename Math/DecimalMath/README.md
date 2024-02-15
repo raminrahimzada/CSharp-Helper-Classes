@@ -1,4 +1,5 @@
 # Math library for decimal processing
+### <i>License</i>: You can freely use `DecimalMath` or any part of it in your project without blaming me about future bugs that may break your production ;)
 
 ```csharp
 decimal dd = 10M;//sample parameter
